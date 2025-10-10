@@ -43,7 +43,7 @@ jobs:
           format: 'YY.MM'   
       -
         name: image-build-upload
-        uses: manjaro/manjaro-iso-action@main
+        uses: megvadulthangya/manjaro-iso-action@grub-fix
         with:
           iso-profiles-repo: 'https://github.com/megvadulthangya/iso-profiles'
           edition: ${{ matrix.edition }}
