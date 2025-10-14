@@ -48,8 +48,7 @@ jobs:
           iso-profiles-repo: 'https://github.com/megvadulthangya/iso-profiles'
           iso-profiles-branch: 'minimal-awesome'
           office-chooser: "true"
-          #edition: ${{ matrix.edition }}
-          edition: "awesome"
+          edition: ${{ matrix.edition }}
           branch: ${{ matrix.branch }}
           scope: ${{ matrix.scope }}
           version: ${{ steps.time.outputs.time }}-Nordic
