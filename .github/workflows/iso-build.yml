@@ -46,6 +46,8 @@ jobs:
         uses: manjaro/manjaro-iso-action@main
         with:
           iso-profiles-repo: 'https://github.com/megvadulthangya/iso-profiles'
+          iso-profiles-branch: 'minimal-awesome'
+          office-chooser: "true"
           edition: ${{ matrix.edition }}
           branch: ${{ matrix.branch }}
           scope: ${{ matrix.scope }}
