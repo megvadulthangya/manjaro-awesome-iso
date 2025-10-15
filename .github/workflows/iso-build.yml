@@ -53,7 +53,7 @@ jobs:
           scope: ${{ matrix.scope }}
           version: ${{ steps.time.outputs.time }}-Nordic
           kernel: linux612
-          code-name: "nordic-awesome-Build"
+          code-name: "awesome-Build"
           release-tag: ${{ needs.prepare-release.outputs.release_tag }}
       -
         name: rollback
