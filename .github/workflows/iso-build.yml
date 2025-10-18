@@ -38,7 +38,7 @@ jobs:
           access_token: ${{ github.token }}
       - 
         id: time
-        uses: nanzm/get-time-action
+        uses: nanzm/get-time-action@v1.1
         with:
           format: 'YY.MM'   
       -
