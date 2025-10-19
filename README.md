@@ -100,7 +100,7 @@ A Manjaro Hello képernyő a telepített rendszerben testreszabott:
 
 ## 🔧 Requirements / Előfeltételek
 
-- Manjaro Linux (any edition with BTRFS recommended / BTRFS javasolt)
+- USE BTRFS recommended / BTRFS javasolt
 - Stable internet connection / Stabil internetkapcsolat
 - Basic terminal knowledge / Alap terminálhasználati ismeret
 
