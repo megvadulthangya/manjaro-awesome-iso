@@ -12,12 +12,12 @@ jobs:
     steps:
       - 
         #uses: styfle/cancel-workflow-action@0.9.0 
-        uses: styfle/cancel-workflow-action@0.12.1
+        uses: styfle/cancel-workflow-action
         with:
           access_token: ${{ github.token }}
       - 
         id: time
-        uses: nanzm/get-time-action@v1.1
+        uses: nanzm/get-time-action
         with:
           format: 'YYYYMMDDHHmm'
     outputs:
@@ -27,18 +27,18 @@ jobs:
     needs: [prepare-release]
     strategy:
       matrix:
-        EDITION: [xfce]
+        EDITION: [awesome]
         BRANCH: [stable]
         SCOPE: [full]
     steps:
       - 
         #uses: styfle/cancel-workflow-action@0.9.0 
-        uses: styfle/cancel-workflow-action@0.12.1
+        uses: styfle/cancel-workflow-action
         with:
           access_token: ${{ github.token }}
       - 
         id: time
-        uses: nanzm/get-time-action@v1.1
+        uses: nanzm/get-time-action
         with:
           format: 'YY.MM'   
       -
@@ -46,12 +46,14 @@ jobs:
         uses: manjaro/manjaro-iso-action@main
         with:
           iso-profiles-repo: 'https://github.com/megvadulthangya/iso-profiles'
+          iso-profiles-branch: 'hellov3'
+          #office-chooser: "true"
           edition: ${{ matrix.edition }}
           branch: ${{ matrix.branch }}
           scope: ${{ matrix.scope }}
-          version: ${{ steps.time.outputs.time }}-Nordic-awesome
+          version: ${{ steps.time.outputs.time }}-Nordic
           kernel: linux612
-          code-name: "nordic-awesome-Build"
+          code-name: "awesome-Build"
           release-tag: ${{ needs.prepare-release.outputs.release_tag }}
       -
         name: rollback
