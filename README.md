@@ -1,80 +1,90 @@
+
 # 🏔️ Awesome Manjaro Edition
 
-**Custom Manjaro ISO with AwesomeWM, Nordic theme, and automated post-install setup**
+**My personal, unified system installer - Create the same consistent AwesomeWM environment across all my devices**
 
 ---
 
 ## ⚙️ Overview / Áttekintés
 
-This is a **custom Manjaro Linux ISO** featuring:
+This project is my **personal, unified system installer**. I created it to easily replicate my preferred computing environment—with my core workflow tools and consistent theming—across different machines.
 
-- Fully configured **AwesomeWM environment**
-- Nordic GTK / Kvantum / LightDM theming
+At its core, this is a **minimal custom Manjaro Linux ISO** featuring:
+
+- Fully configured **AwesomeWM environment** using Nordic color palette
+- Nordic GTK / Kvantum / LightDM theming  
 - Automatic **BTRFS snapshot management** with Snapper
-- Preinstalled developer and system tools
+- Essential developer and system tools
 - Automated **post-install script** for final configuration
 
-Ez egy **egyedi Manjaro Linux ISO**, amely tartalmazza:
+Ez a projekt **személyes, egységes rendszertelepítőm**. Azért készítettem, hogy könnyedén reprodukálni tudjam az általam preferált számítógépes környezetet—alapvető munkafolyamat-eszközeimmel és egységes témázásával—bármelyik eszközömre.
 
-- Teljesen konfigurált **AwesomeWM környezetet**
+A projekt magja egy **minimális Manjaro Linux ISO**, amely tartalmazza:
+
+- Teljesen konfigurált **AwesomeWM környezetet** Nordic színpalettával
 - Nordic GTK / Kvantum / LightDM témát
 - Automatikus **BTRFS snapshot kezelést** Snapper-rel
-- Előtelepített fejlesztői és rendszereszközöket
+- Alapvető fejlesztői és rendszereszközöket
 - Automatikus **post-install szkriptet** a végső beállításokhoz
-
----
-
-## 🪄 Installation Flow / Telepítési folyamat
-
-### 1. **Boot the Live ISO / Indítsd el a Live ISO-t**  
-The system loads the **AwesomeWM live session** (default Manjaro theme).  
-A rendszer betölti az **AwesomeWM live sessiont** (alap Manjaro téma).
-
-### 2. **Run the regular "Install Manjaro" / Futtasd a szokásos "Install Manjaro" folyamatot**  
-Once installed, reboot.  
-Telepítés után indítsd újra a rendszert.
-
-### 3. **First login / Első belépés**  
-A terminal automatically opens showing a system configuration warning.  
-A terminál automatikusan megnyílik és megjeleníti a rendszerbeállítási figyelmeztetést.
-
-### 4. **Run the post-install script / Futtasd a post-install szkriptet**  
-```bash
-sudo bash awesome-install
-```
-
-**The script will:**
-- Configure Snapper & BTRFS maintenance timers
-- Install Nordic theme system-wide
-- Set up AwesomeWM Copycats configuration
-- Install packages, fonts, and developer tools
-- Clean up temporary files
-- Self-destruct after completion
-
-**A szkript elvégzi:**
-- Snapper és BTRFS karbantartó időzítők beállítása
-- Nordic téma rendszer-szintű telepítése
-- AwesomeWM Copycats konfiguráció telepítése
-- Csomagok, betűtípusok és fejlesztői eszközök telepítése
-- Ideiglenes fájlok törlése
-- A szkript önmegsemmisítése a folyamat végén
-
-### 5. **Reboot / Újraindítás**  
-Once finished, reboot to fully apply all changes.  
-A folyamat végén indítsd újra a gépet.
 
 ---
 
 ## 🖥️ Desktop Highlights / Főbb jellemzők
 
-- **Window Manager / Ablakkezelő:** AwesomeWM (Copycats configuration)
+- **Window Manager / Ablakkezelő:** AwesomeWM (Copycats configuration with Nordic colors)
 - **Theme / Téma:** Nordic-standard-buttons
 - **Icons / Ikonok:** Nordzy-dark
 - **Font / Betűtípus:** FiraCode Nerd Font
 - **Cursor / Kurzor:** Nordic-cursors
+- **Color Scheme / Színpaletta:** Complete Nordic color harmony across all components
 - **System base / Rendszer alapja:** Manjaro Stable 6.12 kernel
 - **Filesystem / Fájlrendszer:** BTRFS + Snapper automatic snapshots
 - **Shell / Shell:** Fish (for root / root felhasználónak)
+
+---
+
+## 🪄 Installation Flow / Telepítési folyamat
+
+### 1. **Boot the Live ISO / Indítsd el a Live ISO-t**
+The system loads the **AwesomeWM live session** (default Manjaro theme).  
+A rendszer betölti az **AwesomeWM live sessiont** (alap Manjaro téma).
+
+### 2. **Run the regular "Install Manjaro" / Futtasd a szokásos "Install Manjaro" folyamatot**
+Once installed, reboot.  
+Telepítés után indítsd újra a rendszert.
+
+### 3. **First login / Első belépés**
+A terminal automatically opens showing a system configuration warning.  
+A terminál automatikusan megnyílik és megjeleníti a rendszerbeállítási figyelmeztetést.
+
+### 4. **Run the post-install script / Futtasd a post-install szkriptet**
+```bash
+sudo bash awesome-install
+```
+
+**🔍 Want to see what happens? / Szeretnéd látni, hogy mi történik?**  
+You can review the installation script before running: [View awesome-install source](https://github.com/megvadulthangya/iso-profiles/blob/awesome-nord/community/awesome/desktop-overlay/opt/system_setup/awesome-install)  
+A telepítő szkriptet megtekintheted futtatás előtt: [awesome-install forráskódja](https://github.com/megvadulthangya/iso-profiles/blob/awesome-nord/community/awesome/desktop-overlay/opt/system_setup/awesome-install)
+
+**The script will set up my core environment:**
+- Configure Snapper & BTRFS maintenance timers
+- Install complete Nordic theme system-wide
+- Set up AwesomeWM Copycats configuration with Nordic color scheme
+- Install essential packages, fonts, and developer tools
+- Clean up temporary files
+- Self-destruct after completion
+
+**A szkript feltelepíti az alapvető környezetemet:**
+- Snapper és BTRFS karbantartó időzítők beállítása
+- Teljes Nordic téma rendszer-szintű telepítése
+- AwesomeWM Copycats konfiguráció beállítása Nordic színpalettával
+- Alapvető csomagok, betűtípusok és fejlesztői eszközök telepítése
+- Ideiglenes fájlok törlése
+- A szkript önmegsemmisítése a folyamat végén
+
+### 5. **Reboot / Újraindítás**
+Once finished, reboot to fully apply all changes and get my consistent environment.  
+A folyamat végén indítsd újra a gépet, hogy a teljes környezet aktiválódjon.
 
 ---
 
@@ -140,5 +150,10 @@ Ha hasznosnak találod a projektet, támogasd:
 - 🛠️ [Garuda Linux Tools](https://gitlab.com/garuda-linux/tools)
 - 🎭 [Adi1090x Rofi Themes](https://github.com/adi1090x/rofi)
 
+**Installation Script / Telepítő szkript:**
+- 📜 [awesome-install source](https://github.com/megvadulthangya/iso-profiles/blob/awesome-nord/community/awesome/desktop-overlay/opt/system_setup/awesome-install)
+
 **Custom integration & scripting / Egyedi integráció:**
 - 👨💻 [@megvadulthangya](https://github.com/megvadulthangya)
+```
+
