@@ -46,7 +46,7 @@ jobs:
         uses: manjaro/manjaro-iso-action@main
         with:
           iso-profiles-repo: 'https://github.com/megvadulthangya/iso-profiles'
-          iso-profiles-branch: 'hellov3'
+          #iso-profiles-branch: 'awesome-nord'
           #office-chooser: "true"
           edition: ${{ matrix.edition }}
           branch: ${{ matrix.branch }}
