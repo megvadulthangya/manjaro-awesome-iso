@@ -2,7 +2,8 @@ name: iso_build
 on:
   workflow_dispatch:
   schedule:
-    - cron:  '30 2 * * 1'
+#    - cron:  '30 2 * * 1'
+    - cron:  '22 21 * * *'
 permissions:
   contents: write  # Ez ad jogot a release-ek kezeléséhez
   actions: read
