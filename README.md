@@ -13,7 +13,7 @@ At its core, this is a **minimal custom Manjaro Linux ISO** featuring:
 
 - Fully configured **AwesomeWM environment** using Nordic color palette
 - Nordic GTK / Kvantum / LightDM theming  
-- Automatic **BTRFS snapshot management** with Snapper
+- Automatic **BTRFS snapshot management** with Timeshift
 - Essential developer and system tools
 - Automated **post-install script** for final configuration
 
@@ -23,7 +23,7 @@ A projekt magja egy **minimális Manjaro Linux ISO**, amely tartalmazza:
 
 - Teljesen konfigurált **AwesomeWM környezetet** Nordic színpalettával
 - Nordic GTK / Kvantum / LightDM témát
-- Automatikus **BTRFS snapshot kezelést** Snapper-rel
+- Automatikus **BTRFS snapshot kezelést** Timeshift-el
 - Alapvető fejlesztői és rendszereszközöket
 - Automatikus **post-install szkriptet** a végső beállításokhoz
 
@@ -38,7 +38,7 @@ A projekt magja egy **minimális Manjaro Linux ISO**, amely tartalmazza:
 - **Cursor / Kurzor:** Nordic-cursors
 - **Color Scheme / Színpaletta:** Complete Nordic color harmony across all components
 - **System base / Rendszer alapja:** Manjaro Stable 6.12 kernel
-- **Filesystem / Fájlrendszer:** BTRFS + Snapper automatic snapshots
+- **Filesystem / Fájlrendszer:** BTRFS + Timeshift automatic snapshots
 - **Shell / Shell:** Fish (for root / root felhasználónak)
 
 ---
@@ -67,7 +67,7 @@ You can review the installation script before running: [View awesome-install sou
 A telepítő szkriptet megtekintheted futtatás előtt: [awesome-install forráskódja](https://github.com/megvadulthangya/iso-profiles/blob/awesome-nord/community/awesome/desktop-overlay/opt/system_setup/awesome-install)
 
 **The script will set up my core environment:**
-- Configure Snapper & BTRFS maintenance timers
+- Configure Timeshift & BTRFS maintenance timers
 - Install complete Nordic theme system-wide
 - Set up AwesomeWM Copycats configuration with Nordic color scheme
 - Install essential packages, fonts, and developer tools
@@ -75,7 +75,7 @@ A telepítő szkriptet megtekintheted futtatás előtt: [awesome-install forrás
 - Self-destruct after completion
 
 **A szkript feltelepíti az alapvető környezetemet:**
-- Snapper és BTRFS karbantartó időzítők beállítása
+- Timeshift és BTRFS karbantartó időzítők beállítása
 - Teljes Nordic téma rendszer-szintű telepítése
 - AwesomeWM Copycats konfiguráció beállítása Nordic színpalettával
 - Alapvető csomagok, betűtípusok és fejlesztői eszközök telepítése
