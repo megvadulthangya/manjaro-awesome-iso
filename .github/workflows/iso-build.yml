@@ -1,8 +1,8 @@
 name: iso_build
 on:
   workflow_dispatch:
-  schedule:
-    - cron:  '30 2 * * 1'
+#  schedule:
+#    - cron:  '30 2 * * 1'
 #    - cron:  '22 21 * * *'
 permissions:
   contents: write  # Ez ad jogot a release-ek kezeléséhez
@@ -47,12 +47,12 @@ jobs:
         uses: manjaro/manjaro-iso-action@main
         with:
           iso-profiles-repo: 'https://github.com/megvadulthangya/iso-profiles'
-          #iso-profiles-branch: 'awesome-nord'
+          iso-profiles-branch: 'testing'
           #office-chooser: "true"
           edition: ${{ matrix.edition }}
           branch: ${{ matrix.branch }}
           scope: ${{ matrix.scope }}
-          version: ${{ steps.time.outputs.time }}-Nordic
+          version: ${{ steps.time.outputs.time }}-Nordic-TESTING
           kernel: linux612
           code-name: "awesome-Build"
           release-tag: ${{ needs.prepare-release.outputs.release_tag }}
