@@ -1,8 +1,4 @@
 
-
----
-
-````
 # 🏔️ Awesome Manjaro Edition
 
 **My personal, unified system installer - Create the same consistent AwesomeWM environment across all my devices**
@@ -20,7 +16,6 @@ At its core, this is a **minimal custom Manjaro Linux ISO** featuring:
 - Automatic **BTRFS snapshot management** with Timeshift
 - Essential developer and system tools
 - Automated **post-install script** for final configuration
-- **Preconfigured Darktable presets for photography**, including the full t3mujinpack film emulation collection (Portra, Ektar, Velvia, Ilford, etc.)
 
 Ez a projekt **személyes, egységes rendszertelepítőm**. Azért készítettem, hogy könnyedén reprodukálni tudjam az általam preferált számítógépes környezetet—alapvető munkafolyamat-eszközeimmel és egységes témázásával—bármelyik eszközömre.
 
@@ -31,9 +26,6 @@ A projekt magja egy **minimális Manjaro Linux ISO**, amely tartalmazza:
 - Automatikus **BTRFS snapshot kezelést** Timeshift-el
 - Alapvető fejlesztői és rendszereszközöket
 - Automatikus **post-install szkriptet** a végső beállításokhoz
-- **Darktable t3mujinpack preseteket**, azonnal használhatóan
-
-> **Megjegyzés:** A telepítés és a post-install script futtatása jelenleg hosszabb időt vehet igénybe (hardverfüggően kb. 20 perc – 1 óra). Dolgozom egy új ISO-n, ahol a rendszer már működésre kész, csak Darktable-t kell telepíteni. Később tervezek egy olyan interaktív post-install scriptet, ami lehetővé teszi a programok (pl. Darktable, digiKam, Kdenlive, Geeqie) kiválasztását.
 
 ---
 
@@ -68,48 +60,31 @@ A terminál automatikusan megnyílik és megjeleníti a rendszerbeállítási fi
 ### 4. **Run the post-install script / Futtasd a post-install szkriptet**
 ```bash
 sudo bash awesome-install
-````
+```
 
-**🔍 Want to see what happens? / Szeretnéd látni, hogy mi történik?**
-You can review the installation script before running: [View awesome-install source](https://github.com/megvadulthangya/iso-profiles/blob/awesome-nord/community/awesome/desktop-overlay/opt/system_setup/awesome-install)
+**🔍 Want to see what happens? / Szeretnéd látni, hogy mi történik?**  
+You can review the installation script before running: [View awesome-install source](https://github.com/megvadulthangya/iso-profiles/blob/awesome-nord/community/awesome/desktop-overlay/opt/system_setup/awesome-install)  
 A telepítő szkriptet megtekintheted futtatás előtt: [awesome-install forráskódja](https://github.com/megvadulthangya/iso-profiles/blob/awesome-nord/community/awesome/desktop-overlay/opt/system_setup/awesome-install)
 
 **The script will set up my core environment:**
-
-* Configure Timeshift & BTRFS maintenance timers
-* Install complete Nordic theme system-wide
-* Set up AwesomeWM Copycats configuration with Nordic color scheme
-* Install essential packages, fonts, and developer tools
-* Preload **Darktable t3mujinpack presets**
-* Clean up temporary files
-* Self-destruct after completion
+- Configure Timeshift & BTRFS maintenance timers
+- Install complete Nordic theme system-wide
+- Set up AwesomeWM Copycats configuration with Nordic color scheme
+- Install essential packages, fonts, and developer tools
+- Clean up temporary files
+- Self-destruct after completion
 
 **A szkript feltelepíti az alapvető környezetemet:**
-
-* Timeshift és BTRFS karbantartó időzítők beállítása
-* Teljes Nordic téma rendszer-szintű telepítése
-* AwesomeWM Copycats konfiguráció beállítása Nordic színpalettával
-* Alapvető csomagok, betűtípusok és fejlesztői eszközök telepítése
-* **Darktable t3mujinpack presetek előtelepítése**
-* Ideiglenes fájlok törlése
-* A szkript önmegsemmisítése a folyamat végén
+- Timeshift és BTRFS karbantartó időzítők beállítása
+- Teljes Nordic téma rendszer-szintű telepítése
+- AwesomeWM Copycats konfiguráció beállítása Nordic színpalettával
+- Alapvető csomagok, betűtípusok és fejlesztői eszközök telepítése
+- Ideiglenes fájlok törlése
+- A szkript önmegsemmisítése a folyamat végén
 
 ### 5. **Reboot / Újraindítás**
-
-Once finished, reboot to fully apply all changes and get my consistent environment.
+Once finished, reboot to fully apply all changes and get my consistent environment.  
 A folyamat végén indítsd újra a gépet, hogy a teljes környezet aktiválódjon.
-
----
-
-## 🎞️ Photography / Fotós funkciók
-
-This ISO is **ready for photography workflows**:
-
-* Preinstalled **Darktable t3mujinpack film emulation presets**
-* Works out-of-the-box for RAW photo editing
-* Designed for fast, stable performance for image editing
-
-> **Megjegyzés:** Ideális egy másik laptopon kipróbálni. Jelenleg a telepítés hosszabb lehet a post-install script miatt, de cél, hogy azonnal használható legyen fotós munkára.
 
 ---
 
@@ -119,39 +94,39 @@ This ISO is **ready for photography workflows**:
 
 The Manjaro Hello screen is customized in the installed system:
 
-* Bottom section includes ☕ Buy Me a Coffee
-* GitHub project link for updates
-* "Install XLibre" button launches the terminal installer automatically, adds the XLibre repo & GPG key, and replaces Xorg configuration.
+- Bottom section includes ☕ Buy Me a Coffee
+- GitHub project link for updates
+- "Install XLibre" button launches the terminal installer automatically, adds the XLibre repo & GPG key, and replaces Xorg configuration.
 
 > **Megjegyzés:** Ez a funkció csak a telepített rendszerben érhető el, nem a Live ISO-ban.
 
 A Manjaro Hello képernyő a telepített rendszerben testreszabott:
 
-* Alján ☕ Buy Me a Coffee link
-* GitHub projekt link frissítésekhez
-* "Install XLibre" gomb elindítja a terminált, letölti a telepítő szkriptet, hozzáadja az XLibre repót és GPG kulcsot, majd lecseréli az Xorg konfigurációt
+- Alján ☕ Buy Me a Coffee link
+- GitHub projekt link frissítésekhez
+- "Install XLibre" gomb elindítja a terminált, letölti a telepítő szkriptet, hozzáadja az XLibre repót és GPG kulcsot, majd lecseréli az Xorg konfigurációt
 
 ---
 
 ## 🔧 Requirements / Előfeltételek
 
-* USE BTRFS recommended / BTRFS javasolt
-* Stable internet connection / Stabil internetkapcsolat
-* Basic terminal knowledge / Alap terminálhasználati ismeret
+- USE BTRFS recommended / BTRFS javasolt
+- Stable internet connection / Stabil internetkapcsolat
+- Basic terminal knowledge / Alap terminálhasználati ismeret
 
 ---
 
 ## 📸 Screenshots / Képernyőképek (coming soon)
 
-| Live ISO       | Installed System | Themed AwesomeWM |
-| -------------- | ---------------- | ---------------- |
-| (preview1.png) | (preview2.png)   | (preview3.png)   |
+| Live ISO | Installed System | Themed AwesomeWM |
+|----------|------------------|------------------|
+| (preview1.png) | (preview2.png) | (preview3.png) |
 
 ---
 
 ## ☕ Support / Támogatás
 
-If you find this project useful, please support me:
+If you find this project useful, please support me:  
 Ha hasznosnak találod a projektet, támogasd:
 
 👉 [Buy me a coffee](https://buymeacoffee.com/rohambili)
@@ -167,25 +142,18 @@ Ha hasznosnak találod a projektet, támogasd:
 ## 🧠 Credits / Készítette
 
 **Built upon / Alapjául szolgált:**
-
-* 🐧 [Manjaro Linux](https://manjaro.org/)
-* 🎨 [Nordic Theme](https://github.com/EliverLara/Nordic)
-* ⚡ [AwesomeWM Copycats](https://github.com/lcpz/awesome-copycats)
+- 🐧 [Manjaro Linux](https://manjaro.org/)
+- 🎨 [Nordic Theme](https://github.com/EliverLara/Nordic)
+- ⚡ [AwesomeWM Copycats](https://github.com/lcpz/awesome-copycats)
 
 **Inspiration / Inspiráció:**
-
-* 🛠️ [Garuda Linux Tools](https://gitlab.com/garuda-linux/tools)
-* 🎭 [Adi1090x Rofi Themes](https://github.com/adi1090x/rofi)
+- 🛠️ [Garuda Linux Tools](https://gitlab.com/garuda-linux/tools)
+- 🎭 [Adi1090x Rofi Themes](https://github.com/adi1090x/rofi)
 
 **Installation Script / Telepítő szkript:**
-
-* 📜 [awesome-install source](https://github.com/megvadulthangya/iso-profiles/blob/awesome-nord/community/awesome/desktop-overlay/opt/system_setup/awesome-install)
+- 📜 [awesome-install source](https://github.com/megvadulthangya/iso-profiles/blob/awesome-nord/community/awesome/desktop-overlay/opt/system_setup/awesome-install)
 
 **Custom integration & scripting / Egyedi integráció:**
-
-* 👨💻 [@megvadulthangya](https://github.com/megvadulthangya)
-
+- 👨💻 [@megvadulthangya](https://github.com/megvadulthangya)
 ```
-
----
 
