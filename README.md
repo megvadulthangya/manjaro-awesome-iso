@@ -8,7 +8,7 @@
 ![ISO Status](https://img.shields.io/badge/ISO-Building-blue)
 ![Manjaro Base](https://img.shields.io/badge/Manjaro-Stable-35bf5c)
 ![AwesomeWM](https://img.shields.io/badge/WM-AwesomeWM-3b85c3)
-![License](https://img.shields.io/badge/Licence-MIT-green)
+![License](https://img.shields.io/badge/License-GPLv3-blue)
 ![Darktable](https://img.shields.io/badge/Darktable-Film%20Presets-orange)
 
 ---
@@ -90,7 +90,7 @@ https://github.com/megvadulthangya/manjaro-awesome-iso/releases
 ![ISO Status](https://img.shields.io/badge/ISO-Building-blue)
 ![Manjaro Base](https://img.shields.io/badge/Manjaro-Stable-35bf5c)
 ![AwesomeWM](https://img.shields.io/badge/WM-AwesomeWM-3b85c3)
-![License](https://img.shields.io/badge/License-MIT-green)
+![License](https://img.shields.io/badge/License-GPLv3-blue)
 ![Darktable](https://img.shields.io/badge/Darktable-Film%20Presets-orange)
 
 ---
