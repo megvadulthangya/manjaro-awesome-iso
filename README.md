@@ -40,7 +40,7 @@ Az ISO tartalmazza a teljes tematikus konfigurációt, fejlesztői csomagokat, a
 | Alaprendszer | Manjaro Stable |
 | Kernel | 6.12 (aktuális stabil) |
 | Fájlrendszer | BTRFS + Timeshift automatikus generálás |
-| Shell | Zsh for users | Fish (root) |
+| Shell | Zsh for users, Fish (root) |
 | Automatikus telepítés | Post-install script |
 
 ---
@@ -122,7 +122,7 @@ The ISO includes theming, development tools, automation scripts, and integrated 
 | Base System | Manjaro Stable |
 | Kernel | 6.12 |
 | Filesystem | BTRFS + auto Timeshift |
-| Shell | Fish (root) |
+| Shell | Zsh for users, Fish (root) |
 | Automation | Complete post-install script |
 
 ---
