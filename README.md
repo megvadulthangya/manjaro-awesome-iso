@@ -156,4 +156,3 @@ Ha hasznosnak találod a projektet, támogasd:
 **Custom integration & scripting / Egyedi integráció:**
 - 👨💻 [@megvadulthangya](https://github.com/megvadulthangya)
 ```
-
