@@ -29,8 +29,9 @@ Ez a projekt egy **egyedi Manjaro Linux ISO**, amelyet egy egységes, vizuálisa
 ### 📸 Creative Suite (Photography)
 The ISO comes with a pre-populated **Darktable database**. You only need to install the software (`sudo pacman -S darktable`), and the presets are instantly available.
 * **Stefano Ferro's Styles:** Includes Traveller, Vintage, Dark Tones, Dodge & Burn, RGB Curves, and Urban Style packages.
+* **Perfect for Sony Alpha users (optimized for A7II) but works universally.*
 * **t3mujinpack:** Extensive film emulation pack (Fuji Velvia, Kodachrome, Ilford B&W, etc.).
-* *Perfect for Sony Alpha users (optimized for A7II) but works universally.*
+
 
 ### 🛠️ System Core
 * **Base:** Manjaro Stable
@@ -114,7 +115,7 @@ Ha hasznosnak találod a projektet, támogasd a fejlesztést:
 
 **Photography Tools / Fotós eszközök:**
 * 📷 [Stefano Ferro (MEL365)](https://mel365.com/) - Presets & Styles
-* 🎞️ [t3mujinpack](https://t3mujinpack.com/) - Film emulation
+* 🎞️ [t3mujinpack](https://t3mujinpack.github.io/) - Film emulation
 
 **Custom integration / Egyedi integráció:**
 * 👨💻 [@megvadulthangya](https://github.com/megvadulthangya)
