@@ -70,7 +70,7 @@ jobs:
           echo "$SF_KEY" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           
-          # JAVÍTÁS: Most már a shell és az frs szervert is hozzáadjuk a megbízhatóakhoz
+          # Hozzáadjuk mindkét szervert a kivételekhez
           ssh-keyscan -H frs.sourceforge.net shell.sourceforge.net >> ~/.ssh/known_hosts
 
           # 2. ISO megkeresése
@@ -82,12 +82,15 @@ jobs:
           fi
 
           echo "Megtalált ISO: $ISO_FILE"
-          echo "Feltöltés ide: /home/frs/project/$SF_PROJECT/$SF_DIR/"
+          echo "Cél: /home/frs/project/$SF_PROJECT/$SF_DIR/"
 
-          # 3. Mappa létrehozása (JAVÍTVA: StrictHostKeyChecking=no kapcsolóval)
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519 $SF_USER@shell.sourceforge.net "create"
+          # 3. Mappa létrehozása (EZ A JAVÍTÁS!)
+          # A 'mkdir -p' létrehozza a 'Releases' mappát is, ha nem létezne
+          echo "Mappaszerkezet létrehozása..."
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519 $SF_USER@shell.sourceforge.net "mkdir -p /home/frs/project/$SF_PROJECT/$SF_DIR"
           
-          # 4. Feltöltés (JAVÍTVA: StrictHostKeyChecking=no kapcsolóval)
+          # 4. Feltöltés
+          echo "Feltöltés indítása..."
           rsync -avP -e "ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519" "$ISO_FILE" "$SF_USER@frs.sourceforge.net:/home/frs/project/$SF_PROJECT/$SF_DIR/"
       # --- VÉGE AZ ÚJ RÉSZNEK ---
 
