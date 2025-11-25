@@ -5,24 +5,24 @@ on:
 #    - cron:  '30 2 * * 1'
 #    - cron:  '22 21 * * *'
 permissions:
-  contents: write  # Ez ad jogot a release-ek kezeléséhez
+  contents: write
   actions: read
+
 jobs:
   prepare-release:
     runs-on: ubuntu-24.04
+    timeout-minutes: 120
     steps:
-      - 
-        #uses: styfle/cancel-workflow-action@0.9.0 
-        uses: styfle/cancel-workflow-action@0.12.1
+      - uses: styfle/cancel-workflow-action@0.12.1
         with:
           access_token: ${{ github.token }}
-      - 
-        id: time
+      - id: time
         uses: nanzm/get-time-action@v1.1
         with:
           format: 'YYYYMMDDHHmm'
     outputs:
       release_tag: ${{ steps.time.outputs.time }}
+
   build-release:
     runs-on: ubuntu-24.04
     needs: [prepare-release]
@@ -32,23 +32,21 @@ jobs:
         BRANCH: [stable]
         SCOPE: [full]
     steps:
-      - 
-        #uses: styfle/cancel-workflow-action@0.9.0 
-        uses: styfle/cancel-workflow-action@0.12.1
+      - uses: styfle/cancel-workflow-action@0.12.1
         with:
           access_token: ${{ github.token }}
-      - 
-        id: time
+      
+      - id: time
         uses: nanzm/get-time-action@v1.1
         with:
           format: 'YY.MM'   
-      -
-        name: image-build-upload
+
+      # Ez a lépés építi az ISO-t és tölti fel GitHubra (darabolva)
+      - name: image-build-upload
         uses: manjaro/manjaro-iso-action@main
         with:
           iso-profiles-repo: 'https://github.com/megvadulthangya/iso-profiles'
           iso-profiles-branch: 'testing'
-          #office-chooser: "true"
           build-mirror: https://mirror.netcologne.de/manjaro/
           edition: ${{ matrix.edition }}
           branch: ${{ matrix.branch }}
@@ -57,8 +55,49 @@ jobs:
           kernel: linux612
           code-name: "awesome-Build"
           release-tag: ${{ needs.prepare-release.outputs.release_tag }}
-      -
-        name: rollback
+
+      # --- ÚJ RÉSZ: SOURCEFORGE FELTÖLTÉS ---
+      - name: Upload FULL ISO to SourceForge
+        if: success() # Csak ha a build sikeres volt
+        env:
+          SF_USER: ${{ secrets.SF_USERNAME }}
+          SF_KEY: ${{ secrets.SF_SSH_KEY }}
+          # !!! EZT ÍRD ÁT A SAJÁT PROJEKT NEVEDRE !!!
+          SF_PROJECT: "manjaro-awesome-iso"
+          # Ide tölti fel a mappán belül (pl. Releases/v1.0)
+          # Most a dátumot használom mappa névként, hogy rendezett legyen
+          SF_DIR: "Releases/${{ needs.prepare-release.outputs.release_tag }}"
+        run: |
+          # 1. SSH kulcs beállítása
+          mkdir -p ~/.ssh
+          echo "$SF_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H frs.sourceforge.net >> ~/.ssh/known_hosts
+
+          # 2. Megkeressük a generált ISO fájlt
+          # A find parancs megkeresi az aktuális mappában lévő .iso kiterjesztésű fájlt
+          ISO_FILE=$(find . -type f -name "*.iso" | head -n 1)
+
+          if [ -z "$ISO_FILE" ]; then
+            echo "HIBA: Nem található ISO fájl a feltöltéshez!"
+            exit 1
+          fi
+
+          echo "Megtalált ISO: $ISO_FILE"
+          echo "Feltöltés indítása a SourceForge-ra..."
+
+          # 3. Mappa létrehozása a szerveren (ha nem létezne) és feltöltés
+          # Először létrehozzuk a mappát SSH-val
+          ssh -i ~/.ssh/id_ed25519 $SF_USER@shell.sourceforge.net "create"
+          # (A create parancs biztosítja hogy a tárhely aktív, bár nem mindig kötelező, de biztos ami biztos)
+          
+          # Majd az rsync feltölti a fájlt
+          # Az útvonal: /home/frs/project/PROJEKTNEV/MAPPA/
+          rsync -avP -e "ssh -i ~/.ssh/id_ed25519" "$ISO_FILE" "$SF_USER@frs.sourceforge.net:/home/frs/project/$SF_PROJECT/$SF_DIR/"
+
+      # --- VÉGE AZ ÚJ RÉSZNEK ---
+
+      - name: rollback
         if: ${{ failure() || cancelled() }}
         run: |
           echo ${{ github.token }} | gh auth login --with-token
