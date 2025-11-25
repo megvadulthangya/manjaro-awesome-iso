@@ -1,159 +1,114 @@
-
 # 🏔️ Awesome Manjaro Edition
 
-**My personal, unified system installer - Create the same consistent AwesomeWM environment across all my devices**
+**My personal, unified system installer - Create the same consistent AwesomeWM environment across all my devices.**
+
+[![Download manjaro-awesome-iso](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/manjaro-awesome-iso/files/latest/download)
 
 ---
 
 ## ⚙️ Overview / Áttekintés
 
-This project is my **personal, unified system installer**. I created it to easily replicate my preferred computing environment—with my core workflow tools and consistent theming—across different machines.
+This project is a **custom Manjaro Linux ISO** designed for a cohesive, visually harmonious, and ready-to-work environment.
 
-At its core, this is a **minimal custom Manjaro Linux ISO** featuring:
+**New in this release:** The installation process is now seamless. **No post-install scripts, no hacks.** Just install via Calamares, reboot, and the system is fully configured and ready to use.
 
-- Fully configured **AwesomeWM environment** using Nordic color palette
-- Nordic GTK / Kvantum / LightDM theming  
-- Automatic **BTRFS snapshot management** with Timeshift
-- Essential developer and system tools
-- Automated **post-install script** for final configuration
+Ez a projekt egy **egyedi Manjaro Linux ISO**, amelyet egy egységes, vizuálisan harmonikus és munkára kész környezetnek terveztem.
 
-Ez a projekt **személyes, egységes rendszertelepítőm**. Azért készítettem, hogy könnyedén reprodukálni tudjam az általam preferált számítógépes környezetet—alapvető munkafolyamat-eszközeimmel és egységes témázásával—bármelyik eszközömre.
-
-A projekt magja egy **minimális Manjaro Linux ISO**, amely tartalmazza:
-
-- Teljesen konfigurált **AwesomeWM környezetet** Nordic színpalettával
-- Nordic GTK / Kvantum / LightDM témát
-- Automatikus **BTRFS snapshot kezelést** Timeshift-el
-- Alapvető fejlesztői és rendszereszközöket
-- Automatikus **post-install szkriptet** a végső beállításokhoz
+**Újdonság:** A telepítési folyamat mostantól teljesen zökkenőmentes. **Nincsenek utólagos scriptek, nincsenek "hack"-ek.** Csak telepítsd a szokásos módon, indítsd újra, és a rendszer azonnal használatra kész.
 
 ---
 
-## 🖥️ Desktop Highlights / Főbb jellemzők
+## 🚀 Key Features / Főbb jellemzők
 
-- **Window Manager / Ablakkezelő:** AwesomeWM (Copycats configuration with Nordic colors)
-- **Theme / Téma:** Nordic-standard-buttons
-- **Icons / Ikonok:** Nordzy-dark
-- **Font / Betűtípus:** FiraCode Nerd Font
-- **Cursor / Kurzor:** Nordic-cursors
-- **Color Scheme / Színpaletta:** Complete Nordic color harmony across all components
-- **System base / Rendszer alapja:** Manjaro Stable 6.12 kernel
-- **Filesystem / Fájlrendszer:** BTRFS + Timeshift automatic snapshots
-- **Shell / Shell:** Fish (for root / root felhasználónak)
+### 🖥️ Desktop Environment
+* **Window Manager:** AwesomeWM 4.x (Custom Fork)
+* **Theme:** Unified **Nordic** color scheme across GTK, Kvantum, LightDM, and AwesomeWM.
+* **Wallpapers:** Curated collection "Norded" via ImageGoNord (Sources: Reddit, Unsplash, Wallhaven).
+* **Applets:** **Awesome-rofi** fork, patched for seamless integration.
 
----
+### 📸 Creative Suite (Photography)
+The ISO comes with a pre-populated **Darktable database**. You only need to install the software (`sudo pacman -S darktable`), and the presets are instantly available.
+* **Stefano Ferro's Styles:** Includes Traveller, Vintage, Dark Tones, Dodge & Burn, RGB Curves, and Urban Style packages.
+* **t3mujinpack:** Extensive film emulation pack (Fuji Velvia, Kodachrome, Ilford B&W, etc.).
+* *Perfect for Sony Alpha users (optimized for A7II) but works universally.*
 
-## 🪄 Installation Flow / Telepítési folyamat
-
-### 1. **Boot the Live ISO / Indítsd el a Live ISO-t**
-The system loads the **AwesomeWM live session** (default Manjaro theme).  
-A rendszer betölti az **AwesomeWM live sessiont** (alap Manjaro téma).
-
-### 2. **Run the regular "Install Manjaro" / Futtasd a szokásos "Install Manjaro" folyamatot**
-Once installed, reboot.  
-Telepítés után indítsd újra a rendszert.
-
-### 3. **First login / Első belépés**
-A terminal automatically opens showing a system configuration warning.  
-A terminál automatikusan megnyílik és megjeleníti a rendszerbeállítási figyelmeztetést.
-
-### 4. **Run the post-install script / Futtasd a post-install szkriptet**
-```bash
-sudo bash awesome-install
-```
-
-**🔍 Want to see what happens? / Szeretnéd látni, hogy mi történik?**  
-You can review the installation script before running: [View awesome-install source](https://github.com/megvadulthangya/iso-profiles/blob/awesome-nord/community/awesome/desktop-overlay/opt/system_setup/awesome-install)  
-A telepítő szkriptet megtekintheted futtatás előtt: [awesome-install forráskódja](https://github.com/megvadulthangya/iso-profiles/blob/awesome-nord/community/awesome/desktop-overlay/opt/system_setup/awesome-install)
-
-**The script will set up my core environment:**
-- Configure Timeshift & BTRFS maintenance timers
-- Install complete Nordic theme system-wide
-- Set up AwesomeWM Copycats configuration with Nordic color scheme
-- Install essential packages, fonts, and developer tools
-- Clean up temporary files
-- Self-destruct after completion
-
-**A szkript feltelepíti az alapvető környezetemet:**
-- Timeshift és BTRFS karbantartó időzítők beállítása
-- Teljes Nordic téma rendszer-szintű telepítése
-- AwesomeWM Copycats konfiguráció beállítása Nordic színpalettával
-- Alapvető csomagok, betűtípusok és fejlesztői eszközök telepítése
-- Ideiglenes fájlok törlése
-- A szkript önmegsemmisítése a folyamat végén
-
-### 5. **Reboot / Újraindítás**
-Once finished, reboot to fully apply all changes and get my consistent environment.  
-A folyamat végén indítsd újra a gépet, hogy a teljes környezet aktiválódjon.
+### 🛠️ System Core
+* **Base:** Manjaro Stable
+* **Filesystem:** BTRFS + Timeshift (automatic snapshot management).
+* **Shell:** Fish (root), Zsh/Bash (user).
 
 ---
 
-## 🧩 Extra Feature — "Install XLibre" in Manjaro Hello
+## 🧩 Detailed Components / Részletes összetevők
 
-> **Note:** This feature is only available in the installed system, not in the Live ISO.
+### 1. Awesome WM Nordic Copycats (Fork)
+* **Source:** [megvadulthangya/awesome-copycats-manjaro](https://github.com/megvadulthangya/awesome-copycats-manjaro)
+* **Description:** A modified version of the original Copycats themes. Every element has been recolored to strictly follow the Nordic palette.
+* **Features:**
+    * Autohide widgets & Autostart windowless processes
+    * Quake drop-down terminal
+    * Fast MPD and volume shortcuts
+    * Dynamic tagging & On-the-fly useless gaps resize
+    * Mouse-driven calendar & Notifications (battery, volume, mail)
+    * Freedesktop.org compliant menu
 
-The Manjaro Hello screen is customized in the installed system:
+### 2. Nordic Wallpapers & Rofi
+* **Wallpapers:** A hand-picked collection from Christian Chiarulli, ThePrimeagen, and various art communities, color-graded to Nordic standards.
+* **Rofi:** Forked from `awesome-rofi` to fix compatibility issues within this specific environment. Includes custom Applets, Launchers & Powermenus.
 
-- Bottom section includes ☕ Buy Me a Coffee
-- GitHub project link for updates
-- "Install XLibre" button launches the terminal installer automatically, adds the XLibre repo & GPG key, and replaces Xorg configuration.
-
-> **Megjegyzés:** Ez a funkció csak a telepített rendszerben érhető el, nem a Live ISO-ban.
-
-A Manjaro Hello képernyő a telepített rendszerben testreszabott:
-
-- Alján ☕ Buy Me a Coffee link
-- GitHub projekt link frissítésekhez
-- "Install XLibre" gomb elindítja a terminált, letölti a telepítő szkriptet, hozzáadja az XLibre repót és GPG kulcsot, majd lecseréli az Xorg konfigurációt
+### 3. Darktable Presets Integration
+I have integrated a professional library of styles directly into the ISO's configuration.
+* **Why?** To speed up photo editing workflows immediately after installation.
+* **Included:**
+    * *Stefano Ferro's Collection:* Vintage, Urban, Travel, and Dark Tones styles.
+    * *t3mujinpack:* The definitive open-source film simulation pack (Kodak, Fuji, Agfa, Ilford emulations).
+* **How to use:** Simply install Darktable. The database is already in `~/.config/darktable/`.
 
 ---
 
-## 🔧 Requirements / Előfeltételek
+## 🪄 Installation / Telepítés
 
-- USE BTRFS recommended / BTRFS javasolt
-- Stable internet connection / Stabil internetkapcsolat
-- Basic terminal knowledge / Alap terminálhasználati ismeret
+1.  **Download:** Grab the ISO from [SourceForge](https://sourceforge.net/projects/manjaro-awesome-iso/files/latest/download).
+2.  **Boot:** Start the Live System.
+3.  **Install:** Run the standard Manjaro installer (Calamares).
+4.  **Reboot & Enjoy:** No further setup required. The environment is exactly as shown in the screenshots.
+
+1.  **Letöltés:** Töltsd le az ISO-t a [SourceForge](https://sourceforge.net/projects/manjaro-awesome-iso/files/latest/download)-ról.
+2.  **Boot:** Indítsd el a Live rendszert.
+3.  **Telepítés:** Futtasd a szokásos Manjaro telepítőt.
+4.  **Használat:** Újraindítás után a rendszer azonnal kész. Nincs szükség további beállításra.
 
 ---
 
-## 📸 Screenshots / Képernyőképek (coming soon)
+## 🧩 Extra Feature — "Install XLibre"
 
-| Live ISO | Installed System | Themed AwesomeWM |
-|----------|------------------|------------------|
-| (preview1.png) | (preview2.png) | (preview3.png) |
+> **Note:** Available in the installed system via Manjaro Hello.
+
+* Adds XLibre repository & GPG key.
+* Replaces Xorg configuration for specific hardware setups.
+* Accessible via the custom "Install XLibre" button in the Welcome screen.
 
 ---
 
 ## ☕ Support / Támogatás
 
-If you find this project useful, please support me:  
-Ha hasznosnak találod a projektet, támogasd:
+If you find this project useful, please support the development:
+Ha hasznosnak találod a projektet, támogasd a fejlesztést:
 
 👉 [Buy me a coffee](https://buymeacoffee.com/rohambili)
-
----
-
-## 🔗 ISO Download / ISO Letöltés
-
-[⬇️ Latest Awesome manjaro ISO release](https://github.com/megvadulthangya/manjaro-awesome-iso/releases)
 
 ---
 
 ## 🧠 Credits / Készítette
 
 **Built upon / Alapjául szolgált:**
-- 🐧 [Manjaro Linux](https://manjaro.org/)
-- 🎨 [Nordic Theme](https://github.com/EliverLara/Nordic)
-- ⚡ [AwesomeWM Copycats](https://github.com/lcpz/awesome-copycats)
+* 🐧 [Manjaro Linux](https://manjaro.org/)
+* 🎨 [Nordic Theme](https://github.com/EliverLara/Nordic)
+* ⚡ [AwesomeWM Copycats](https://github.com/lcpz/awesome-copycats) & [Luca CPZ](https://github.com/lcpz)
 
-**Inspiration / Inspiráció:**
-- 🛠️ [Garuda Linux Tools](https://gitlab.com/garuda-linux/tools)
-- 🎭 [Adi1090x Rofi Themes](https://github.com/adi1090x/rofi)
+**Photography Tools / Fotós eszközök:**
+* 📷 [Stefano Ferro (MEL365)](https://mel365.com/) - Presets & Styles
+* 🎞️ [t3mujinpack](https://t3mujinpack.com/) - Film emulation
 
-**Installation Script / Telepítő szkript:**
-- 📜 [awesome-install source](https://github.com/megvadulthangya/iso-profiles/blob/awesome-nord/community/awesome/desktop-overlay/opt/system_setup/awesome-install)
-
-**Custom integration & scripting / Egyedi integráció:**
-- 👨💻 [@megvadulthangya](https://github.com/megvadulthangya)
-```
-
+**Custom integration / Egyedi integráció:**
+* 👨💻 [@megvadulthangya](https://github.com/megvadulthangya)
