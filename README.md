@@ -65,6 +65,12 @@ I have integrated a professional library of styles directly into the ISO's confi
 * **How to use:** Simply install Darktable. The database is already in `~/.config/darktable/`.
 
 ---
+## 📺 Video Walkthrough / Videós bemutató
+Watch the installation and setup guide:
+Tekintsd meg a telepítési és beállítási útmutatót:
+
+[![Manjaro Awesome Edition Showcase](https://img.youtube.com/vi/7Z-CN08_2U8/maxresdefault.jpg)](https://youtu.be/7Z-CN08_2U8)
+---
 
 ## 🪄 Installation / Telepítés
 
