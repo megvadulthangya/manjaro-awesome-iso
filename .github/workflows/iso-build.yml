@@ -26,6 +26,7 @@ jobs:
   build-release:
     runs-on: ubuntu-24.04
     needs: [prepare-release]
+    timeout-minutes: 120 # Ezt is megtartottam, hasznos biztonsági öv
     strategy:
       matrix:
         EDITION: [awesome]
@@ -41,7 +42,7 @@ jobs:
         with:
           format: 'YY.MM'   
 
-      # Ez a lépés építi az ISO-t és tölti fel GitHubra (darabolva)
+      # Ez a lépés építi az ISO-t
       - name: image-build-upload
         uses: manjaro/manjaro-iso-action@main
         with:
@@ -54,9 +55,10 @@ jobs:
           version: ${{ steps.time.outputs.time }}-Nordic-TESTING
           kernel: linux612
           code-name: "awesome-Build"
-          release-tag: ${{ needs.prepare-release.outputs.release_tag }}
+          # KIKOMMENTELVE: Így nem tölti fel GitHub Release-be és nem darabol!
+          # release-tag: ${{ needs.prepare-release.outputs.release_tag }}
 
-      # --- ÚJ RÉSZ: SOURCEFORGE FELTÖLTÉS ---
+      # --- SOURCEFORGE FELTÖLTÉS ---
       - name: Upload FULL ISO + CHECKSUMS to SourceForge
         if: success()
         env:
@@ -86,26 +88,22 @@ jobs:
           echo "Cél: /home/frs/project/$SF_PROJECT/$SF_DIR/"
 
           # 3. Rendszer ébresztése (create)
-          # A '|| true' azért kell, hogy ne álljon meg hibával, ha a shell épp nem interaktív
           echo "SourceForge tárhely inicializálása..."
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519 $SF_USER@shell.sourceforge.net "create" || true
           
-          # 4. Mappa létrehozása SFTP-vel (EZ A JAVÍTÁS!)
-          # Mivel a 'ssh mkdir' nem engedélyezett, SFTP parancsot küldünk
-          # Létrehozzuk a Releases mappát (ha nincs) és az al-mappát is.
+          # 4. Mappa létrehozása SFTP-vel
           echo "Mappaszerkezet létrehozása SFTP-vel..."
           echo -e "mkdir /home/frs/project/$SF_PROJECT/Releases\n mkdir /home/frs/project/$SF_PROJECT/$SF_DIR" > sftp_commands.txt
           
-          # Futtatjuk az SFTP batch fájlt. A "-" jelzi, hogy hagyja figyelmen kívül a hibákat (pl ha a Releases már létezik)
           sftp -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519 -b sftp_commands.txt $SF_USER@frs.sourceforge.net || true
           
           # 5. Feltöltés
           echo "Feltöltés indítása..."
           rsync -avP -e "ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519" "$SOURCE_DIR"/*.iso "$SOURCE_DIR"/*.sha* "$SF_USER@frs.sourceforge.net:/home/frs/project/$SF_PROJECT/$SF_DIR/"
-      # --- VÉGE AZ ÚJ RÉSZNEK ---
-
-      - name: rollback
-        if: ${{ failure() || cancelled() }}
-        run: |
-          echo ${{ github.token }} | gh auth login --with-token
-          gh release delete ${{ needs.prepare-release.outputs.release_tag }} -y --repo ${{ github.repository }}
+      
+      # KIKOMMENTELVE: Mivel nincs GitHub Release, nincs mit visszavonni sem
+      # - name: rollback
+      #   if: ${{ failure() || cancelled() }}
+      #   run: |
+      #     echo ${{ github.token }} | gh auth login --with-token
+      #     gh release delete ${{ needs.prepare-release.outputs.release_tag }} -y --repo ${{ github.repository }}
