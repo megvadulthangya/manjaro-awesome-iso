@@ -73,28 +73,34 @@ jobs:
           # Hozzáadjuk a szervereket a kivételekhez
           ssh-keyscan -H frs.sourceforge.net shell.sourceforge.net >> ~/.ssh/known_hosts
 
-          # 2. ISO megkeresése (hogy tudjuk, melyik mappában vagyunk)
+          # 2. ISO megkeresése
           ISO_FILE=$(find . -type f -name "*.iso" | head -n 1)
+          SOURCE_DIR=$(dirname "$ISO_FILE")
 
           if [ -z "$ISO_FILE" ]; then
             echo "HIBA: Nem található ISO fájl!"
             exit 1
           fi
 
-          # Megkeressük a fájl mappáját (általában . vagy ./build)
-          SOURCE_DIR=$(dirname "$ISO_FILE")
-
           echo "Forrás mappa: $SOURCE_DIR"
           echo "Cél: /home/frs/project/$SF_PROJECT/$SF_DIR/"
 
-          # 3. Mappa létrehozása a szerveren
-          echo "Mappaszerkezet létrehozása..."
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519 $SF_USER@shell.sourceforge.net "mkdir -p /home/frs/project/$SF_PROJECT/$SF_DIR"
+          # 3. Rendszer ébresztése (create)
+          # A '|| true' azért kell, hogy ne álljon meg hibával, ha a shell épp nem interaktív
+          echo "SourceForge tárhely inicializálása..."
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519 $SF_USER@shell.sourceforge.net "create" || true
           
-          # 4. Feltöltés (ISO + SHA fájlok)
+          # 4. Mappa létrehozása SFTP-vel (EZ A JAVÍTÁS!)
+          # Mivel a 'ssh mkdir' nem engedélyezett, SFTP parancsot küldünk
+          # Létrehozzuk a Releases mappát (ha nincs) és az al-mappát is.
+          echo "Mappaszerkezet létrehozása SFTP-vel..."
+          echo -e "mkdir /home/frs/project/$SF_PROJECT/Releases\n mkdir /home/frs/project/$SF_PROJECT/$SF_DIR" > sftp_commands.txt
+          
+          # Futtatjuk az SFTP batch fájlt. A "-" jelzi, hogy hagyja figyelmen kívül a hibákat (pl ha a Releases már létezik)
+          sftp -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519 -b sftp_commands.txt $SF_USER@frs.sourceforge.net || true
+          
+          # 5. Feltöltés
           echo "Feltöltés indítása..."
-          # A "$SOURCE_DIR"/*.iso jelöli az iso-t
-          # A "$SOURCE_DIR"/*.sha* jelöli az összes hash fájlt (.sha1, .sha256, .sha512)
           rsync -avP -e "ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519" "$SOURCE_DIR"/*.iso "$SOURCE_DIR"/*.sha* "$SF_USER@frs.sourceforge.net:/home/frs/project/$SF_PROJECT/$SF_DIR/"
       # --- VÉGE AZ ÚJ RÉSZNEK ---
 
