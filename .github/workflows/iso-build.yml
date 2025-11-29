@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
 #  schedule:
 #    - cron:  '30 2 * * 1'
-#    - cron:  '22 21 * * *'
+
 permissions:
   contents: write
   actions: read
@@ -26,13 +26,19 @@ jobs:
   build-release:
     runs-on: ubuntu-24.04
     needs: [prepare-release]
-    timeout-minutes: 120 # Ezt is megtartottam, hasznos biztonsági öv
+    timeout-minutes: 120
     strategy:
       matrix:
         EDITION: [awesome]
         BRANCH: [stable]
         SCOPE: [full]
     steps:
+      # 1. LÉPÉS: Itt töltjük le a repót a git log miatt (EZ AZ ÚJ RÉSZ)
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Ez kell ahhoz, hogy lássuk a git előzményeket
+
       - uses: styfle/cancel-workflow-action@0.12.1
         with:
           access_token: ${{ github.token }}
@@ -42,7 +48,7 @@ jobs:
         with:
           format: 'YY.MM'   
 
-      # Ez a lépés építi az ISO-t
+      # 2. LÉPÉS: ISO Építése
       - name: image-build-upload
         uses: manjaro/manjaro-iso-action@main
         with:
@@ -55,11 +61,10 @@ jobs:
           version: ${{ steps.time.outputs.time }}-Nordic-TESTING
           kernel: linux612
           code-name: "awesome-Build"
-          # KIKOMMENTELVE: Így nem tölti fel GitHub Release-be és nem darabol!
-          # release-tag: ${{ needs.prepare-release.outputs.release_tag }}
+          # release-tag kikommentelve, mert SF-re megyünk
 
-      # --- SOURCEFORGE FELTÖLTÉS ---
-      - name: Upload FULL ISO + CHECKSUMS to SourceForge
+      # 3. LÉPÉS: Readme generálás és Feltöltés SourceForge-ra
+      - name: Generate README & Upload to SourceForge
         if: success()
         env:
           SF_USER: ${{ secrets.SF_USERNAME }}
@@ -67,15 +72,13 @@ jobs:
           SF_PROJECT: "manjaro-awesome-iso"
           SF_DIR: "Releases/${{ needs.prepare-release.outputs.release_tag }}"
         run: |
-          # 1. SSH beállítás
+          # --- 1. SSH beállítás ---
           mkdir -p ~/.ssh
           echo "$SF_KEY" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
-          
-          # Hozzáadjuk a szervereket a kivételekhez
           ssh-keyscan -H frs.sourceforge.net shell.sourceforge.net >> ~/.ssh/known_hosts
 
-          # 2. ISO megkeresése
+          # --- 2. ISO megkeresése ---
           ISO_FILE=$(find . -type f -name "*.iso" | head -n 1)
           SOURCE_DIR=$(dirname "$ISO_FILE")
 
@@ -83,27 +86,54 @@ jobs:
             echo "HIBA: Nem található ISO fájl!"
             exit 1
           fi
-
           echo "Forrás mappa: $SOURCE_DIR"
-          echo "Cél: /home/frs/project/$SF_PROJECT/$SF_DIR/"
 
-          # 3. Rendszer ébresztése (create)
-          echo "SourceForge tárhely inicializálása..."
+          # --- 3. README.md GENERÁLÁSE ---
+          README_PATH="$SOURCE_DIR/README.md"
+          
+          # Fejléc
+          echo "# Manjaro Awesome Edition (Testing)" > "$README_PATH"
+          echo "" >> "$README_PATH"
+          
+          # FONTOS INFÓK (Super+Z)
+          echo "## ⚠️ Important Note / Fontos infó" >> "$README_PATH"
+          echo "The **Tilda** (Quake-style) terminal is installed and configured." >> "$README_PATH"
+          echo "You can toggle it with the keybinding: **SUPER + Z**" >> "$README_PATH"
+          echo "(This binding is not listed in the standard AwesomeWM help popup/Super S)" >> "$README_PATH"
+          echo "" >> "$README_PATH"
+
+          # Build infók
+          echo "## Build Info" >> "$README_PATH"
+          echo "- **Date:** $(date -u '+%Y-%m-%d %H:%M UTC')" >> "$README_PATH"
+          echo "- **Version:** ${{ steps.time.outputs.time }}-Nordic-TESTING" >> "$README_PATH"
+          echo "- **Kernel:** linux612" >> "$README_PATH"
+          echo "" >> "$README_PATH"
+          
+          # Checksum szekció (Beolvassuk a fájlokat, hogy látszódjon a szövegben is)
+          echo "## Checksums" >> "$README_PATH"
+          echo '```' >> "$README_PATH"
+          cat "$SOURCE_DIR"/*.sha* >> "$README_PATH" || echo "Checksums available as separate files."
+          echo '```' >> "$README_PATH"
+          echo "" >> "$README_PATH"
+          
+          # Változások (Git log)
+          echo "## Recent Changes" >> "$README_PATH"
+          echo "Last 10 commits from repository:" >> "$README_PATH"
+          echo "" >> "$README_PATH"
+          # Ez most már működni fog, mert betettük a checkout lépést az elejére!
+          git log -n 10 --pretty=format:"* %s (%h) - %ad" --date=short >> "$README_PATH" || echo "Git history not available." >> "$README_PATH"
+
+          echo "README generálva: $README_PATH"
+          # ---------------------------------
+
+          # --- 4. SourceForge Mappák és Feltöltés ---
+          echo "SourceForge inicializálása..."
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519 $SF_USER@shell.sourceforge.net "create" || true
           
-          # 4. Mappa létrehozása SFTP-vel
-          echo "Mappaszerkezet létrehozása SFTP-vel..."
+          echo "Mappaszerkezet létrehozása..."
           echo -e "mkdir /home/frs/project/$SF_PROJECT/Releases\n mkdir /home/frs/project/$SF_PROJECT/$SF_DIR" > sftp_commands.txt
-          
           sftp -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519 -b sftp_commands.txt $SF_USER@frs.sourceforge.net || true
           
-          # 5. Feltöltés
           echo "Feltöltés indítása..."
-          rsync -avP -e "ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519" "$SOURCE_DIR"/*.iso "$SOURCE_DIR"/*.sha* "$SF_USER@frs.sourceforge.net:/home/frs/project/$SF_PROJECT/$SF_DIR/"
-      
-      # KIKOMMENTELVE: Mivel nincs GitHub Release, nincs mit visszavonni sem
-      # - name: rollback
-      #   if: ${{ failure() || cancelled() }}
-      #   run: |
-      #     echo ${{ github.token }} | gh auth login --with-token
-      #     gh release delete ${{ needs.prepare-release.outputs.release_tag }} -y --repo ${{ github.repository }}
+          # A "$README_PATH" változó biztosítja, hogy a szöveges fájl is felmenjen
+          rsync -avP -e "ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519" "$SOURCE_DIR"/*.iso "$SOURCE_DIR"/*.sha* "$README_PATH" "$SF_USER@frs.sourceforge.net:/home/frs/project/$SF_PROJECT/$SF_DIR/"
